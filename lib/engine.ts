@@ -97,9 +97,21 @@ export function assess(answers: AssessAnswers, openQuestionsCount = 0): Restrict
     return false;
   });
 
+  const primaryKeyMap: Record<string, string> = {
+    specialData: "p 11",
+    privateLife: "p 13",
+    personalData: "p 12",
+    tax: "p 16",
+    businessSecret: "p 17",
+    tech: "p 10",
+    proceedings: "p 1",
+    securityType: "turvalisusega",
+    internal: "sise",
+  };
+
   const primary = primaryCandidate
-    ? grounds.find((ground) => ground.includes(primaryCandidate === "personalData" ? "p 12" : primaryCandidate === "businessSecret" ? "p 17" : primaryCandidate === "specialData" ? "p 11" : primaryCandidate === "privateLife" ? "p 13" : primaryCandidate === "tax" ? "p 16" : primaryCandidate === "tech" ? "p 10" : primaryCandidate === "proceedings" ? "p 1" : primaryCandidate === "securityType" ? "turvalisusega" : "sise") ?? grounds[0]
-    : grounds[0]) || grounds[0] || "Avalikustamise alust ei tuvastatud";
+    ? grounds.find((ground) => ground.includes(primaryKeyMap[primaryCandidate] || "")) || grounds[0]
+    : grounds[0] || "Avalikustamise alust ei tuvastatud";
 
   let kehtivusaeg = "kuni 5 a";
   let kehtivusCite = "AvTS § 40 lg 1";

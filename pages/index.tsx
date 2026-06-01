@@ -20,6 +20,8 @@ export default function Home() {
   const [meta, setMeta] = useState<RecordMeta>(initialMeta);
   const [confirmBusinessSecret, setConfirmBusinessSecret] = useState<boolean | undefined>(undefined);
   const [resultState, setResultState] = useState(() => deriveFromMeta(initialMeta));
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -27,6 +29,30 @@ export default function Home() {
     }, 200);
     return () => window.clearTimeout(timer);
   }, [meta, confirmBusinessSecret]);
+
+  const handleConfirm = async () => {
+    setIsSaving(true);
+    setSaveMessage(undefined);
+
+    try {
+      const response = await fetch("/api/juurdepääsupiirang/tuleta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ meta: { ...meta, confirmBusinessSecret }, save: true }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || "Salvestamine ebaõnnestus");
+      }
+
+      setSaveMessage("Piirang salvestatud Supabase'i.");
+    } catch (error) {
+      setSaveMessage(`Salvestamine ebaõnnestus: ${error instanceof Error ? error.message : "tundmatu viga"}`);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const contractSeriesLabel = useMemo(() => {
     const labelMap: Record<string, string> = {
@@ -157,6 +183,9 @@ export default function Home() {
           signals={resultState.signals}
           openQuestions={resultState.openQuestions}
           onQuestionAnswer={handleQuestionAnswer}
+          onConfirm={handleConfirm}
+          isSaving={isSaving}
+          lastSaved={saveMessage}
         />
       </div>
     </main>

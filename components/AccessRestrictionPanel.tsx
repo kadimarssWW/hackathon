@@ -5,9 +5,12 @@ interface PanelProps {
   signals: SignalItem[];
   openQuestions: OpenQuestion[];
   onQuestionAnswer: (key: string, value: boolean) => void;
+  onConfirm: () => void;
+  isSaving: boolean;
+  lastSaved?: string;
 }
 
-export function AccessRestrictionPanel({ result, signals, openQuestions, onQuestionAnswer }: PanelProps) {
+export function AccessRestrictionPanel({ result, signals, openQuestions, onQuestionAnswer, onConfirm, isSaving, lastSaved }: PanelProps) {
   return (
     <div className="card restriction-card">
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
@@ -80,9 +83,14 @@ export function AccessRestrictionPanel({ result, signals, openQuestions, onQuest
       )}
 
       <div style={{ marginTop: 24, textAlign: "right" }}>
-        <button className="primary">
-          {result.piirang === "AK" ? "Kinnita AK piirang" : "Salvesta avalikuna"}
+        <button className="primary" onClick={onConfirm} disabled={isSaving}>
+          {isSaving ? "Salvestan..." : result.piirang === "AK" ? "Kinnita AK piirang" : "Salvesta avalikuna"}
         </button>
+        {lastSaved && (
+          <div style={{ marginTop: 12, color: "#058757", fontSize: 13 }}>
+            {lastSaved}
+          </div>
+        )}
       </div>
     </div>
   );
