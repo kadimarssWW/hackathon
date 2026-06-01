@@ -1,0 +1,256 @@
+:root {
+  color-scheme: light;
+  --ww-brand-500: #0D6EFD;
+  --ww-brand-200: #CFE2FF;
+  --ww-brand-100: #EFF7FF;
+  --ww-brand-900: #04214C;
+  --ww-success-500: #058757;
+  --ww-success-100: #F4FFF6;
+  --ww-warning-500: #D7BB0C;
+  --ww-warning-100: #FFFAEF;
+  --ww-danger-600: #D13241;
+  --ww-surface: #FFFFFF;
+  --ww-surface-100: #F8F9FA;
+  --ww-surface-200: #F2F3F6;
+  --ww-border: #DEE2E6;
+  --ww-border-strong: #E9ECEF;
+  --ww-text: #212529;
+  --ww-muted: #495057;
+  --ww-font: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ww-radius: 8px;
+  --ww-radius-sm: 4px;
+  --ww-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --ww-shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+  --ww-space-4: 4px;
+  --ww-space-8: 8px;
+  --ww-space-12: 12px;
+  --ww-space-16: 16px;
+  --ww-space-24: 24px;
+  --ww-space-32: 32px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--ww-font);
+  color: var(--ww-text);
+  background: #F8F9FA;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--ww-brand-500);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.8rem 1.2rem;
+}
+
+button.secondary {
+  background: white;
+  color: var(--ww-text);
+  border: 1px solid var(--ww-border);
+  border-radius: 9999px;
+  padding: 0.8rem 1.2rem;
+}
+
+.page-shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--ww-border-strong);
+  padding-bottom: 18px;
+  margin-bottom: 28px;
+}
+
+.page-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius);
+  box-shadow: var(--ww-shadow-sm);
+}
+
+.form-card {
+  padding: 24px;
+}
+
+.restriction-card {
+  position: sticky;
+  top: 32px;
+  padding: 24px;
+  background: #FFFFFF;
+}
+
+.field-group {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.label span {
+  color: var(--ww-danger-600);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  border: 1px solid var(--ww-border);
+  border-radius: var(--ww-radius-sm);
+  padding: 14px 16px;
+  background: white;
+  color: var(--ww-text);
+}
+
+.input.required,
+.select.required,
+.textarea.required {
+  background: #F1F7FF;
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.chip-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--ww-surface-100);
+  border-radius: 9999px;
+  border: 1px solid var(--ww-border);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge.auto {
+  background: var(--ww-brand-100);
+  color: var(--ww-brand-900);
+}
+
+.status-card,
+.signal-card,
+.question-card {
+  background: var(--ww-surface-100);
+  padding: 16px;
+  border-radius: var(--ww-radius-sm);
+  border: 1px solid var(--ww-border);
+}
+
+.status-card h3,
+.signal-card h3,
+.question-card h3 {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+}
+
+.signal-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ww-border-strong);
+}
+
+.signal-item:last-child {
+  border-bottom: none;
+}
+
+.signal-key {
+  color: var(--ww-muted);
+  font-size: 0.86rem;
+}
+
+.output-row {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.output-row div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.output-row dt {
+  margin: 0;
+  color: var(--ww-muted);
+}
+
+.output-row dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.open-questions {
+  margin-top: 24px;
+}
+
+.open-questions button {
+  margin-right: 12px;
+}
+
+@media (max-width: 1120px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .restriction-card {
+    position: static;
+  }
+}
